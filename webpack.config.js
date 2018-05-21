@@ -7,7 +7,10 @@ module.exports = (env, options) => {
   const devMode = options.mode === 'development';
   return {
     devtool: devMode ? 'inline-source-map' : 'none',
-    entry: ['./src/js/app.js'],
+    entry: [
+      './src/js/app.js',
+      './src/scss/main.scss',
+    ],
     output: {
       filename: './js/app.[hash].js',
     },
@@ -18,12 +21,20 @@ module.exports = (env, options) => {
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
+            options: {
+              presets: ['babel-preset-env'],
+            },
           },
         },
         {
           test: /\.(css|sass|scss)$/,
           use: [
-            MiniCssExtractPlugin.loader,
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: '../',
+              },
+            },
             devMode ? 'css-loader' : { loader: 'css-loader', options: { minimize: true } },
             'sass-loader',
           ],
@@ -53,8 +64,7 @@ module.exports = (env, options) => {
         filename: './index.html',
       }),
       new MiniCssExtractPlugin({
-        filename: './css/[name].[hash].css',
-        chunkFilename: '[id].css',
+        filename: 'css/[name].[hash].css',
       }),
     ],
   };
