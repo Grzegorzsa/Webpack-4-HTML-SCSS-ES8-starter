@@ -49,7 +49,7 @@ module.exports = (env, options) => {
             {
               loader: 'file-loader',
               options: {
-                name: './img/[name].[hash].[ext]',
+                name: 'img/[name].[hash].[ext]',
                 context: '',
               },
             },
@@ -60,8 +60,8 @@ module.exports = (env, options) => {
     plugins: [
       new CleanWebpackPlugin(['dist']),
       new HtmlWebPackPlugin({
-        template: './src/index.html',
-        filename: './index.html',
+        template: 'src/index.html',
+        filename: 'index.html',
       }),
       new MiniCssExtractPlugin({
         filename: 'css/[name].[hash].css',
