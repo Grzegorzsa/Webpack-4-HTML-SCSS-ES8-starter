@@ -24,7 +24,7 @@ updated entry in webpack.config.js:
 ```js
   app: [
     'babel-polyfill',
-    './src/js/app.js',
+    './src/js/main.js',
     './src/scss/main.scss',
   ],
 ```
