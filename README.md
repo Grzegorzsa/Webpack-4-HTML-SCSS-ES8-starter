@@ -12,3 +12,19 @@ npm install
 
 `npm run dev` - development build  
 `npm run build` - production build
+
+## Extras
+
+Since Babel only transforms syntax (like arrow functions), you can use babel-polyfill in order to support new globals such as Promise or new native methods like String.padStart (left-pad).
+
+`npm i --save-dev babel-polyfill` - install Polyfill package
+
+updated entry in webpack.config.js:
+
+```js
+  app: [
+    'babel-polyfill',
+    './src/js/app.js',
+    './src/scss/main.scss',
+  ],
+```
