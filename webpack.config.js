@@ -15,7 +15,7 @@ module.exports = (env, options) => {
     ],
     output: {
       path: path.resolve(__dirname, './dist'),
-      filename: 'js/main.[hash:4].js',
+      filename: 'js/main.[hash:6].js',
       publicPath: '/',
     },
     optimization: {
@@ -43,12 +43,7 @@ module.exports = (env, options) => {
         {
           test: /\.(css|sass|scss)$/,
           use: [
-            {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                publicPath: '/',
-              },
-            },
+            { loader: MiniCssExtractPlugin.loader },
             'css-loader',
             'sass-loader',
           ],
