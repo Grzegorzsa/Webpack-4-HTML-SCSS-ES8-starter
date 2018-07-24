@@ -8,12 +8,12 @@ module.exports = (env, options) => {
   return {
     devtool: devMode ? 'inline-source-map' : 'none',
     entry: [
-      './src/js/app.js',
+      './src/js/main.js',
       './src/scss/main.scss',
     ],
     output: {
       path: path.resolve(__dirname, './dist'),
-      filename: 'js/app.[hash].js',
+      filename: 'js/main.[hash].js',
       publicPath: '/',
     },
     module: {
