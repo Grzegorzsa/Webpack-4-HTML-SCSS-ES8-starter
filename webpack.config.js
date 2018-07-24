@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const path = require('path');
 
 module.exports = (env, options) => {
@@ -13,8 +15,18 @@ module.exports = (env, options) => {
     ],
     output: {
       path: path.resolve(__dirname, './dist'),
-      filename: 'js/main.[hash].js',
+      filename: 'js/main.[hash:4].js',
       publicPath: '/',
+    },
+    optimization: {
+      minimizer: devMode ? [] : [
+        new UglifyJsPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: false,
+        }),
+        new OptimizeCSSAssetsPlugin({}),
+      ],
     },
     module: {
       rules: [
@@ -37,7 +49,7 @@ module.exports = (env, options) => {
                 publicPath: '/',
               },
             },
-            devMode ? 'css-loader' : { loader: 'css-loader', options: { minimize: true } },
+            'css-loader',
             'sass-loader',
           ],
         },
@@ -51,7 +63,7 @@ module.exports = (env, options) => {
             {
               loader: 'file-loader',
               options: {
-                name: 'img/[name].[hash].[ext]',
+                name: 'img/[name].[hash:4].[ext]',
                 context: '',
               },
             },
@@ -66,7 +78,7 @@ module.exports = (env, options) => {
         filename: 'index.html',
       }),
       new MiniCssExtractPlugin({
-        filename: 'css/[name].[hash].css',
+        filename: 'css/[name].[hash:6].css',
       }),
     ],
   };
