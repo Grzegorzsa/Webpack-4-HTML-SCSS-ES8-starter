@@ -4,9 +4,8 @@ Frontend starter: HTML + SCSS + ES8 + ESLing config
 
 ## Installation
 
-```bash
-npm install
-```
+`npm install` - install all modules  
+`npm update` - update all modules to newest versions
 
 ## Usage
 
